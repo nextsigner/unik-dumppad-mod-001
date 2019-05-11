@@ -10,14 +10,14 @@ Item {
     property bool showFailTools: false
 
     Column{
-        spacing: app.fs
+        spacing: app.fs*0.1
         anchors.centerIn: r
         width: flickableSetSil.width
         height: r.height
         Flickable{
             id: flickableSetSil
             width: gridSil.width
-            height: gridSil.height+app.fs*2
+            height: gridSil.height+app.fs*4
             //anchors.centerIn: r
             contentWidth: gridSil.width
             contentHeight: gridSil.height
@@ -40,6 +40,7 @@ Item {
                             text: modelData
                             //fontColor: parseInt(app.jsonSilabas[modelData][0])===-1?'red':app.c2
                             //backgroudColor: parseInt(app.jsonSilabas[modelData][0])===-1?'yellow':app.c3
+                            numero: index
                             clip: false
                             width: parent.width
                             height: parent.height
@@ -53,22 +54,9 @@ Item {
                 }
             }
         }
-        TextEdit{
-            id: te
-            width: r.width-app.fs
-            height: app.fs*1.2
-            color: 'red'
-            text: 'editar'
-            font.pixelSize: app.fs
-            onTextChanged: {
-                //c1.sequence=text
-            }
-            Keys.onReturnPressed: r.focus=true
-            Rectangle{
-                anchors.fill: parent
-                z:parent.z-1
-            }
-        }
+        Sequencer{}
+        Sequencer{}
+        Sequencer{}
     }
     Timer{
         id: tLoadSils
@@ -145,53 +133,8 @@ Item {
         var pos=teclado.indexOf(event.text)
         //console.log('Evento: '+event.text+' pos='+pos)
         //if (event.text==='q'){
-            var b=gridSil.children[pos].children[0]
-            b.play()
+            //var b=gridSil.children[pos].children[0]
+            //b.play()
         //}
     }
-    /*
-    function addSilFail(sil){
-        r.uYContent=flickableSetSil.contentY
-        var ar=''
-        for(var i=0;i<app.arraySilabas.length;i++){
-            var s=app.arraySilabas[i]
-            if(s!==sil){
-                ar+=s+'\n'
-            }else{
-                ar+=s+'!\n'
-                ar+=s+'\n'
-            }
-        }
-        unik.setFile(Sil.silMsLocation+'/sils.txt', ar)
-        repSil.model=[]
-        app.arraySilabas=[]
-        app.arrayMsSils=[]
-        Sil.setDataSils()
-        tLoadSils.start()
-    }
-    function removeSilFail(sil){
-        r.uYContent=flickableSetSil.contentY
-        var ar=''
-        var finded=false
-        for(var i=0;i<app.arraySilabas.length;i++){
-            var s=app.arraySilabas[i]
-            if(s!==sil){
-                ar+=s+'\n'
-            }else{
-                if(finded){
-                    ar+=s+'\n'
-                }
-                finded=true
-            }
-        }
-        unik.setFile(Sil.silMsLocation+'/sils.txt', ar)
-        repSil.model=[]
-        app.arraySilabas=[]
-        app.arrayMsSils=[]
-        Sil.setDataSils()
-        tLoadSils.start()
-        r.uSilPlayed=''
-    }
-    */
-
 }
